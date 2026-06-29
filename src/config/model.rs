@@ -12,6 +12,7 @@ use super::{
 pub const MAX_TOAST_DELAY_SECONDS: u64 = 3600;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Default)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "lowercase")]
 pub enum UpdateChannelConfig {
     #[default]
@@ -29,6 +30,7 @@ impl UpdateChannelConfig {
 }
 
 #[derive(Debug, Clone, Copy, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct UpdateConfig {
     pub channel: UpdateChannelConfig,
@@ -55,6 +57,7 @@ fn default_update_channel() -> UpdateChannelConfig {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Default)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "lowercase")]
 pub enum ToastDelivery {
     #[default]
@@ -77,6 +80,7 @@ pub enum ToastHerdrPosition {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Default)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "kebab-case")]
 pub enum ToastClipboardPosition {
     TopLeft,
@@ -89,6 +93,7 @@ pub enum ToastClipboardPosition {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Default)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "lowercase")]
 pub enum AgentPanelSortConfig {
     #[default]
@@ -107,6 +112,7 @@ impl AgentPanelSortConfig {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "lowercase")]
 pub enum HostCursorModeConfig {
     #[default]
@@ -116,6 +122,7 @@ pub enum HostCursorModeConfig {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "lowercase")]
 pub enum SidebarCollapsedModeConfig {
     #[default]
@@ -185,12 +192,14 @@ pub struct ToastConfig {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct HerdrToastConfig {
     pub position: ToastHerdrPosition,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct ClipboardToastConfig {
     pub enabled: bool,
@@ -222,6 +231,7 @@ impl<'de> Deserialize<'de> for NewTerminalCwdConfig {
 }
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "snake_case")]
 pub enum ShellModeConfig {
     #[default]
@@ -231,6 +241,7 @@ pub enum ShellModeConfig {
 }
 
 #[derive(Debug, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct TerminalConfig {
     /// Executable used for new interactive panes. Empty means SHELL, then /bin/sh.
@@ -242,6 +253,7 @@ pub struct TerminalConfig {
 }
 
 #[derive(Debug, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct SessionConfig {
     /// Resume supported AI-agent panes into their native conversation sessions
@@ -285,6 +297,14 @@ pub fn validated_sidebar_bounds(min: u16, max: u16) -> Option<(u16, u16)> {
 }
 
 #[derive(Debug, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
+#[cfg_attr(
+    feature = "schema",
+    schemars(
+        title = "herdr configuration",
+        description = "Configuration for herdr's config.toml. All sections and fields are optional; herdr falls back to safe defaults when a value is missing or invalid."
+    )
+)]
 #[serde(default)]
 pub struct Config {
     pub onboarding: Option<bool>,
@@ -426,6 +446,7 @@ pub struct KeysConfig {
 }
 
 #[derive(Debug, Default, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub(crate) struct KeysConfigOverlay {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -755,6 +776,7 @@ fn effective_indexed_config(
 }
 
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct IndexedKeysConfig {
     /// Modifier combo for tab shortcuts 1-9. Unset by default.
@@ -766,6 +788,7 @@ pub struct IndexedKeysConfig {
 }
 
 #[derive(Debug, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct WorktreesConfig {
     /// Root directory under which Herdr creates <repo>/<branch-slug> checkouts.
@@ -773,6 +796,7 @@ pub struct WorktreesConfig {
 }
 
 #[derive(Debug, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct UiConfig {
     pub sidebar_width: u16,
@@ -823,6 +847,7 @@ pub struct UiConfig {
 
 /// Cursor shape (DECSCUSR) used for the forced IME anchor.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "snake_case")]
 pub enum ImeCursorShape {
     Block,
@@ -849,6 +874,7 @@ impl ImeCursorShape {
 }
 
 #[derive(Debug, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct AdvancedConfig {
     /// Maximum scrollback buffer size in bytes retained per pane terminal. Default: 10000000.
@@ -857,6 +883,7 @@ pub struct AdvancedConfig {
 }
 
 #[derive(Debug, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct RemoteConfig {
     /// Add keepalive fallbacks and private connection reuse for `herdr --remote`.
@@ -873,6 +900,7 @@ impl Default for RemoteConfig {
 }
 
 #[derive(Debug, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct ExperimentalConfig {
     /// Allow launching herdr inside an existing herdr pane. Default: false.
@@ -1094,6 +1122,82 @@ impl Default for AdvancedConfig {
     fn default() -> Self {
         Self {
             scrollback_limit_bytes: DEFAULT_SCROLLBACK_LIMIT_BYTES,
+        }
+    }
+}
+
+#[cfg(feature = "schema")]
+mod schema_impls {
+    //! Manual `JsonSchema` impls for types with custom `Deserialize` impls.
+    //!
+    //! These route the schema through either a plain string shape or a
+    //! derive-able helper struct so the generated schema reflects the actual
+    //! accepted TOML shape instead of the runtime field shape (which can
+    //! involve non-`JsonSchema` types like `crossterm::KeyModifiers`).
+
+    use super::{
+        KeysConfig, KeysConfigOverlay, NewTerminalCwdConfig, RightClickPassthroughModifierConfig,
+        ToastConfig,
+    };
+    use schemars::JsonSchema;
+    use std::borrow::Cow;
+
+    impl JsonSchema for RightClickPassthroughModifierConfig {
+        fn schema_name() -> Cow<'static, str> {
+            "RightClickPassthroughModifierConfig".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::RightClickPassthroughModifierConfig").into()
+        }
+        fn json_schema(_generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+            schemars::json_schema!({
+                "type": "string",
+                "description": "Modifier that lets right-click gestures pass through to pane apps. Empty string, \"off\", \"none\", or \"disabled\" disables it. Otherwise a \"+\"-separated combination of ctrl/control, alt/option, cmd/command/super, meta, or hyper (shift is not allowed)."
+            })
+        }
+    }
+
+    impl JsonSchema for NewTerminalCwdConfig {
+        fn schema_name() -> Cow<'static, str> {
+            "NewTerminalCwdConfig".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::NewTerminalCwdConfig").into()
+        }
+        fn json_schema(_generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+            schemars::json_schema!({
+                "type": "string",
+                "description": "CWD policy for new interactive panes, tabs, and workspaces. Accepted string values: \"\" or \"follow\" (inherit the current pane's CWD), \"home\", \"current\" (the focused pane's CWD), or an arbitrary path string."
+            })
+        }
+    }
+
+    impl JsonSchema for ToastConfig {
+        fn schema_name() -> Cow<'static, str> {
+            "ToastConfig".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::ToastConfig").into()
+        }
+        fn json_schema(generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+            // Delegate to the derive-able helper that mirrors the custom
+            // deserializer's accepted TOML shape (legacy `enabled` bool,
+            // `delay_seconds` range, optional `herdr`/`clipboard`).
+            crate::config::schema::ToastConfigSchema::json_schema(generator)
+        }
+    }
+
+    impl JsonSchema for KeysConfig {
+        fn schema_name() -> Cow<'static, str> {
+            "KeysConfig".into()
+        }
+        fn schema_id() -> Cow<'static, str> {
+            concat!(module_path!(), "::KeysConfig").into()
+        }
+        fn json_schema(generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+            // `KeysConfig` deserializes via the `KeysConfigOverlay` shape, so
+            // the schema must describe the overlay (optional fields + aliases).
+            KeysConfigOverlay::json_schema(generator)
         }
     }
 }

@@ -7,6 +7,7 @@ use crate::detect::Agent;
 use super::io::resolve_config_relative_path;
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct SoundConfig {
     pub enabled: bool,
@@ -23,6 +24,7 @@ pub struct SoundConfig {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct AgentSoundOverrides {
     pub pi: AgentSoundSetting,
@@ -47,6 +49,7 @@ pub struct AgentSoundOverrides {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "snake_case")]
 pub enum AgentSoundSetting {
     #[default]

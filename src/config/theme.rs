@@ -12,6 +12,7 @@ use tracing::warn;
 /// red = "#ff6188"
 /// ```
 #[derive(Debug, Clone, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct ThemeConfig {
     /// Built-in theme name. Default: "catppuccin".
@@ -28,6 +29,7 @@ pub struct ThemeConfig {
 
 /// Per-token color overrides. All fields optional — only set what you want to change.
 #[derive(Debug, Clone, Default, Deserialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct CustomThemeColors {
     pub accent: Option<String>,

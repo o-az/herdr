@@ -236,6 +236,7 @@ fn run_config_command(args: &[String]) -> std::io::Result<i32> {
     match subcommand {
         "check" => config_check(&args[1..]),
         "reset-keys" => config_reset_keys(&args[1..]),
+        "schema" => config_schema(&args[1..]),
         "help" | "--help" | "-h" => {
             print_config_help();
             Ok(0)
@@ -1156,6 +1157,25 @@ fn print_config_help() {
     eprintln!("herdr config commands:");
     eprintln!("  herdr config check  validate config.toml and print diagnostics");
     eprintln!("  herdr config reset-keys  back up config.toml and remove custom keybindings");
+    eprintln!("  herdr config schema      print the JSON Schema for config.toml to stdout");
+}
+
+fn config_schema(_args: &[String]) -> std::io::Result<i32> {
+    #[cfg(feature = "schema")]
+    {
+        let pretty = crate::config::schema::generate_schema_pretty();
+        print!("{pretty}");
+        Ok(0)
+    }
+    #[cfg(not(feature = "schema"))]
+    {
+        eprintln!(
+            "herdr was built without the `schema` feature; rebuild with \
+             `cargo build --features schema` (or `cargo run --features schema -- config schema`) \
+             to emit the config schema."
+        );
+        Ok(1)
+    }
 }
 
 fn print_terminal_help() {

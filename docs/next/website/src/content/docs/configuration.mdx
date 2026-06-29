@@ -38,6 +38,36 @@ Herdr shows first-run setup when `onboarding` is missing or true. Continuing fro
 onboarding = false
 ```
 
+## JSON Schema
+
+Herdr ships a JSON Schema (Draft 2020-12) for `config.toml` at [`schemas/config.json`](https://github.com/ogulcancelik/herdr/blob/master/schemas/config.json) in the source tree. It covers every top-level section and is generated from the same Rust types Herdr uses to parse the config, so it stays in sync with the parser.
+
+Print the current schema to stdout (requires a build with the `schema` cargo feature):
+
+```bash
+herdr config schema
+```
+
+Associate it with `config.toml` in your editor for autocompletion and validation.
+
+**Taplo / Even Better TOML (VS Code):** add a schema directive as the first line of `config.toml`:
+
+```toml
+#:schema https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json
+```
+
+Or register it globally in your Taplo config (`~/.taplo/taplo.toml`):
+
+```toml
+[[schemas]]
+path = "**/herdr/config.toml"
+url = "https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json"
+```
+
+**Neovim:** with a TOML LSP that reads `#:schema` directives (e.g. `taplo`), the directive above is enough. Otherwise point your schema plugin at the same URL for `~/.config/herdr/config.toml`.
+
+The schema describes the canonical field names. Serde `alias`es that the parser still accepts (for example `agent_panel_sort = "workspaces"`, `scrollback_lines`, or `fullscreen` for `zoom`) are not listed in the schema, so editors may flag those legacy spellings even though Herdr reads them fine.
+
 ## Reload config
 
 Reload a running server after editing `config.toml`:

@@ -38,6 +38,36 @@ herdr --default-config > ~/.config/herdr/config.toml
 onboarding = false
 ```
 
+## JSON Schema
+
+Herdr 在源码树的 [`schemas/config.json`](https://github.com/ogulcancelik/herdr/blob/master/schemas/config.json) 中提供用于 `config.toml` 的 JSON Schema（Draft 2020-12）。它涵盖所有顶层部分，并由 Herdr 解析配置时使用的同一组 Rust 类型生成，因此会与解析器保持同步。
+
+将当前 schema 输出到标准输出（构建时需要启用 `schema` Cargo feature）：
+
+```bash
+herdr config schema
+```
+
+在编辑器中将它与 `config.toml` 关联，即可获得自动补全和验证。
+
+**Taplo / Even Better TOML（VS Code）：** 在 `config.toml` 第一行添加 schema 指令：
+
+```toml
+#:schema https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json
+```
+
+或者在全局 Taplo 配置（`~/.taplo/taplo.toml`）中注册：
+
+```toml
+[[schemas]]
+path = "**/herdr/config.toml"
+url = "https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json"
+```
+
+**Neovim：** 如果 TOML LSP 支持读取 `#:schema` 指令（例如 `taplo`），上面的指令就足够了。否则，请在 schema 插件中将同一 URL 关联到 `~/.config/herdr/config.toml`。
+
+该 schema 描述规范字段名。解析器仍接受的 Serde `alias`（例如 `agent_panel_sort = "workspaces"`、`scrollback_lines`，或作为 `zoom` 别名的 `fullscreen`）不会列在 schema 中，因此即使 Herdr 可以读取这些旧拼写，编辑器仍可能将其标为警告。
+
 ## 重载配置
 
 编辑 `config.toml` 后，重载正在运行的服务器：

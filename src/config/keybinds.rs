@@ -16,6 +16,7 @@ pub struct LiveKeybindConfig {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(untagged)]
 pub enum BindingConfig {
     One(String),
@@ -75,6 +76,7 @@ impl BindingConfig {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, Default)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(rename_all = "snake_case")]
 pub enum CommandKeybindType {
     #[default]
@@ -84,6 +86,7 @@ pub enum CommandKeybindType {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct CommandKeybindConfig {
     /// Key that runs a command. Use `prefix+g` for prefix mode or a modified chord for direct mode.

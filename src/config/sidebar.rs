@@ -193,10 +193,16 @@ where
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct AgentsSidebarConfig {
+    #[cfg_attr(feature = "schema", schemars(with = "Vec<Vec<String>>"))]
     #[serde(deserialize_with = "deserialize_sidebar_rows")]
     pub rows: AgentSidebarRows,
+    #[cfg_attr(
+        feature = "schema",
+        schemars(with = "BTreeMap<String, Vec<Vec<String>>>")
+    )]
     #[serde(default, deserialize_with = "deserialize_rows_by_agent")]
     pub rows_by_agent: BTreeMap<String, AgentSidebarRows>,
     pub row_gap: u16,
@@ -228,8 +234,10 @@ impl Default for AgentsSidebarConfig {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct SpacesSidebarConfig {
+    #[cfg_attr(feature = "schema", schemars(with = "Vec<Vec<String>>"))]
     #[serde(deserialize_with = "deserialize_sidebar_rows")]
     pub rows: SpaceSidebarRows,
     pub row_gap: u16,
@@ -248,6 +256,7 @@ impl Default for SpacesSidebarConfig {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Deserialize, Serialize)]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct SidebarConfig {
     pub agents: AgentsSidebarConfig,

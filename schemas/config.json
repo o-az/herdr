@@ -1,0 +1,1540 @@
+{
+  "$defs": {
+    "AdvancedConfig": {
+      "properties": {
+        "scrollback_limit_bytes": {
+          "default": 10000000,
+          "description": "Maximum scrollback buffer size in bytes retained per pane terminal. Default: 10000000.",
+          "format": "uint",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AgentPanelSortConfig": {
+      "enum": [
+        "spaces",
+        "priority"
+      ],
+      "type": "string"
+    },
+    "AgentSoundOverrides": {
+      "properties": {
+        "agy": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "amp": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "claude": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "cline": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "codex": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "cursor": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "devin": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "droid": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "gemini": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "github_copilot": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "grok": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "hermes": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "kilo": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "kimi": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "kiro": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "maki": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "open_code": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "pi": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        },
+        "qodercli": {
+          "$ref": "#/$defs/AgentSoundSetting"
+        }
+      },
+      "type": "object"
+    },
+    "AgentSoundSetting": {
+      "enum": [
+        "default",
+        "on",
+        "off"
+      ],
+      "type": "string"
+    },
+    "AgentsSidebarConfig": {
+      "properties": {
+        "row_gap": {
+          "default": 0,
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rows": {
+          "default": [
+            [
+              "state_icon",
+              "workspace",
+              "tab"
+            ],
+            [
+              "agent"
+            ]
+          ],
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "rows_by_agent": {
+          "additionalProperties": {
+            "items": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "default": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "BindingConfig": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "ClipboardToastConfig": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "position": {
+          "$ref": "#/$defs/ToastClipboardPosition",
+          "default": "bottom-center"
+        }
+      },
+      "type": "object"
+    },
+    "CommandKeybindConfig": {
+      "properties": {
+        "command": {
+          "default": "",
+          "description": "Command executed either in the background shell or inside a pane.",
+          "type": "string"
+        },
+        "description": {
+          "default": null,
+          "description": "Optional user-defined description for this custom command.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "key": {
+          "$ref": "#/$defs/BindingConfig",
+          "default": "",
+          "description": "Key that runs a command. Use `prefix+g` for prefix mode or a modified chord for direct mode."
+        },
+        "type": {
+          "$ref": "#/$defs/CommandKeybindType",
+          "default": "shell",
+          "description": "Command execution mode. Default: \"shell\"."
+        }
+      },
+      "type": "object"
+    },
+    "CommandKeybindType": {
+      "enum": [
+        "shell",
+        "pane",
+        "plugin_action"
+      ],
+      "type": "string"
+    },
+    "CustomThemeColors": {
+      "description": "Per-token color overrides. All fields optional — only set what you want to change.",
+      "properties": {
+        "accent": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "blue": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "green": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mauve": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "overlay0": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "overlay1": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "panel_bg": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "peach": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "red": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subtext0": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "surface0": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "surface1": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "surface_dim": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "teal": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "yellow": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ExperimentalConfig": {
+      "properties": {
+        "allow_nested": {
+          "default": false,
+          "description": "Allow launching herdr inside an existing herdr pane. Default: false.",
+          "type": "boolean"
+        },
+        "cjk_ime_agents": {
+          "default": [],
+          "description": "Restrict `reveal_hidden_cursor_for_cjk_ime` to focused panes whose\ndetected agent matches one of these names (case-insensitive). Empty\nlist means apply to any focused pane. Unknown agent names are ignored;\nif the list contains no valid names, the reveal does not apply.\nAccepted names: pi, claude, codex, gemini, cursor, devin, cline,\nopencode, copilot, kimi, kiro, droid, amp, grok, hermes, kilo,\nqodercli, qoder, maki.\nDefault: empty.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "cjk_ime_cursor_shape": {
+          "$ref": "#/$defs/ImeCursorShape",
+          "description": "Cursor shape rendered for the IME anchor when\n`reveal_hidden_cursor_for_cjk_ime` is enabled. Default: \"steady_block\"."
+        },
+        "kitty_graphics": {
+          "default": false,
+          "description": "Experimental local Kitty graphics rendering for attached clients. Default: false.",
+          "type": "boolean"
+        },
+        "pane_history": {
+          "default": false,
+          "description": "Persist pane screen history to session-history.json. Default: false.",
+          "type": "boolean"
+        },
+        "reveal_hidden_cursor_for_cjk_ime": {
+          "default": false,
+          "description": "Expose the focused pane's cursor anchor to the outer terminal even when\nthe pane requested `?25l`, so macOS native input methods keep tracking\nthe candidate window when TUIs paint their own cursor (Claude Code, pi,\ncodex, etc.). Default: false.\n\nWhen the pane reports no cursor position, falls back to the pane's\ntop-left so a stable IME anchor is always available.\n\nTrade-off when enabled: an extra hardware cursor will be visible in the\nouter terminal for apps that hide the cursor without painting a\nreplacement (vim normal mode, etc.). See #149.",
+          "type": "boolean"
+        },
+        "switch_ascii_input_source_in_prefix": {
+          "default": false,
+          "description": "While prefix mode is active, temporarily switch the macOS host input\nsource to an ASCII-capable keyboard layout so prefix commands are read\nas ASCII even when a CJK IME is active, then restore the previous input\nsource when prefix mode exits. macOS only; a no-op elsewhere and a\nbest-effort no-op if the switch fails. Default: false.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "HerdrToastConfig": {
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/ToastHerdrPosition",
+          "default": "bottom-right"
+        }
+      },
+      "type": "object"
+    },
+    "HostCursorModeConfig": {
+      "enum": [
+        "auto",
+        "native",
+        "drawn"
+      ],
+      "type": "string"
+    },
+    "ImeCursorShape": {
+      "description": "Cursor shape (DECSCUSR) used for the forced IME anchor.",
+      "enum": [
+        "block",
+        "steady_block",
+        "underline",
+        "steady_underline",
+        "bar",
+        "steady_bar"
+      ],
+      "type": "string"
+    },
+    "IndexedKeysConfig": {
+      "properties": {
+        "agents": {
+          "default": "",
+          "description": "Modifier combo for agent shortcuts 1-9. Unset by default.",
+          "type": "string"
+        },
+        "tabs": {
+          "default": "",
+          "description": "Modifier combo for tab shortcuts 1-9. Unset by default.",
+          "type": "string"
+        },
+        "workspaces": {
+          "default": "",
+          "description": "Modifier combo for workspace shortcuts 1-9. Unset by default.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "KeysConfig": {
+      "properties": {
+        "close_pane": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "close_tab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "close_workspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "command": {
+          "items": {
+            "$ref": "#/$defs/CommandKeybindConfig"
+          },
+          "type": [
+            "array",
+            "null"
+          ],
+          "writeOnly": true
+        },
+        "copy_mode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cycle_pane_next": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cycle_pane_previous": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "detach": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "edit_scrollback": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focus_agent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focus_pane_down": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focus_pane_left": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focus_pane_right": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focus_pane_up": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "goto": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "help": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "indexed": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IndexedKeysConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_pane": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "navigate_pane_down": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "navigate_pane_left": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "navigate_pane_right": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "navigate_pane_up": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "navigate_workspace_down": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "navigate_workspace_up": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_tab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_workspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_worktree": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "next_agent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "next_tab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "next_workspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "open_notification_target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "open_worktree": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prefix": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "previous_agent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "previous_tab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "previous_workspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reload_config": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "remote_image_paste": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "remove_worktree": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rename_pane": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rename_tab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rename_workspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resize_mode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "settings": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "split_horizontal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "split_vertical": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "swap_pane_down": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "swap_pane_left": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "swap_pane_right": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "swap_pane_up": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "switch_tab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "switch_workspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "toggle_sidebar": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "workspace_picker": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "zoom": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BindingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "NewTerminalCwdConfig": {
+      "description": "CWD policy for new interactive panes, tabs, and workspaces. Accepted string values: \"\" or \"follow\" (inherit the current pane's CWD), \"home\", \"current\" (the focused pane's CWD), or an arbitrary path string.",
+      "type": "string"
+    },
+    "RemoteConfig": {
+      "properties": {
+        "manage_ssh_config": {
+          "default": true,
+          "description": "Add keepalive fallbacks and private connection reuse for `herdr --remote`.\nSet false to run plain ssh unchanged. Default: true.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "RightClickPassthroughModifierConfig": {
+      "description": "Modifier that lets right-click gestures pass through to pane apps. Empty string, \"off\", \"none\", or \"disabled\" disables it. Otherwise a \"+\"-separated combination of ctrl/control, alt/option, cmd/command/super, meta, or hyper (shift is not allowed).",
+      "type": "string"
+    },
+    "SessionConfig": {
+      "properties": {
+        "resume_agents_on_restore": {
+          "default": true,
+          "description": "Resume supported AI-agent panes into their native conversation sessions\nwhen restoring a Herdr session. Default: true.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ShellModeConfig": {
+      "enum": [
+        "auto",
+        "login",
+        "non_login"
+      ],
+      "type": "string"
+    },
+    "SidebarCollapsedModeConfig": {
+      "enum": [
+        "compact",
+        "hidden"
+      ],
+      "type": "string"
+    },
+    "SidebarConfig": {
+      "properties": {
+        "agents": {
+          "$ref": "#/$defs/AgentsSidebarConfig",
+          "default": {
+            "row_gap": 0,
+            "rows": [
+              [
+                "state_icon",
+                "workspace",
+                "tab"
+              ],
+              [
+                "agent"
+              ]
+            ],
+            "rows_by_agent": {}
+          }
+        },
+        "spaces": {
+          "$ref": "#/$defs/SpacesSidebarConfig",
+          "default": {
+            "row_gap": 0,
+            "rows": [
+              [
+                "state_icon",
+                "workspace"
+              ],
+              [
+                "branch",
+                "git_status"
+              ]
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "SoundConfig": {
+      "properties": {
+        "agents": {
+          "$ref": "#/$defs/AgentSoundOverrides"
+        },
+        "done_path": {
+          "default": null,
+          "description": "Optional mp3 file path for \"done\" notifications.\nRelative paths are resolved from the config file's directory.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "path": {
+          "default": null,
+          "description": "Optional mp3 file path used for all notification sounds.\nRelative paths are resolved from the config file's directory.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "request_path": {
+          "default": null,
+          "description": "Optional mp3 file path for \"request\" notifications.\nRelative paths are resolved from the config file's directory.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "SpacesSidebarConfig": {
+      "properties": {
+        "row_gap": {
+          "default": 0,
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rows": {
+          "default": [
+            [
+              "state_icon",
+              "workspace"
+            ],
+            [
+              "branch",
+              "git_status"
+            ]
+          ],
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "TerminalConfig": {
+      "properties": {
+        "default_shell": {
+          "default": "",
+          "description": "Executable used for new interactive panes. Empty means SHELL, then /bin/sh.",
+          "type": "string"
+        },
+        "new_cwd": {
+          "$ref": "#/$defs/NewTerminalCwdConfig",
+          "description": "CWD policy for new interactive panes, tabs, and workspaces."
+        },
+        "shell_mode": {
+          "$ref": "#/$defs/ShellModeConfig",
+          "default": "auto",
+          "description": "Startup mode for new interactive pane shells."
+        }
+      },
+      "type": "object"
+    },
+    "ThemeConfig": {
+      "description": "Theme configuration: pick a built-in or override individual tokens.\n\n```toml\n[theme]\nname = \"tokyo-night\"  # built-in: catppuccin, terminal, dracula, nord, etc.\n\n[theme.custom]        # override individual tokens on top of the base\naccent = \"#f5c2e7\"\nred = \"#ff6188\"\n```",
+      "properties": {
+        "auto_switch": {
+          "default": false,
+          "description": "Follow host terminal light/dark appearance and switch between theme names.",
+          "type": "boolean"
+        },
+        "custom": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CustomThemeColors"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Custom overrides — applied on top of the selected base theme."
+        },
+        "dark_name": {
+          "default": null,
+          "description": "Theme name used when `auto_switch` selects a dark appearance.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "light_name": {
+          "default": null,
+          "description": "Theme name used when `auto_switch` selects a light appearance.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "default": null,
+          "description": "Built-in theme name. Default: \"catppuccin\".",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ToastClipboardPosition": {
+      "enum": [
+        "top-left",
+        "top-center",
+        "top-right",
+        "bottom-left",
+        "bottom-center",
+        "bottom-right"
+      ],
+      "type": "string"
+    },
+    "ToastConfig": {
+      "description": "Schema-shape mirror of `[ui.toast]`'s custom deserializer.\n\n`ToastConfig` has a custom `Deserialize` impl that accepts an optional\nlegacy `enabled` bool alongside `delivery`, and rejects `delay_seconds`\noutside `0..=3600`. Routing `JsonSchema` for `ToastConfig` through this\nhelper (via `#[schemars(from = \"ToastConfigSchema\")]`) makes the generated\nschema reflect the actual accepted TOML shape instead of the runtime field\nshape.",
+      "properties": {
+        "clipboard": {
+          "$ref": "#/$defs/ClipboardToastConfig",
+          "default": {
+            "enabled": true,
+            "position": "bottom-center"
+          }
+        },
+        "delay_seconds": {
+          "default": null,
+          "description": "Seconds before a toast is dismissed. Must be between 0 and 3600.",
+          "format": "uint64",
+          "maximum": 3600,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "delivery": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToastDelivery"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "enabled": {
+          "default": null,
+          "description": "Legacy boolean: `true` maps to `delivery = \"herdr\"`, `false` to \"off\".\nIgnored when `delivery` is set explicitly.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "herdr": {
+          "$ref": "#/$defs/HerdrToastConfig",
+          "default": {
+            "position": "bottom-right"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "ToastDelivery": {
+      "enum": [
+        "off",
+        "herdr",
+        "terminal",
+        "system"
+      ],
+      "type": "string"
+    },
+    "ToastHerdrPosition": {
+      "enum": [
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right"
+      ],
+      "type": "string"
+    },
+    "UiConfig": {
+      "properties": {
+        "accent": {
+          "default": "cyan",
+          "description": "Accent color for highlights, borders, and navigation UI.\nAccepts hex (#89b4fa), named colors (cyan, blue), or RGB (rgb(137,180,250)).",
+          "type": "string"
+        },
+        "agent_panel_sort": {
+          "$ref": "#/$defs/AgentPanelSortConfig",
+          "default": "spaces",
+          "description": "Agent sidebar ordering. Saved values are \"spaces\" or \"priority\". Default: \"spaces\"."
+        },
+        "confirm_close": {
+          "default": true,
+          "description": "Ask for confirmation before closing a workspace. Default: true.",
+          "type": "boolean"
+        },
+        "copy_on_select": {
+          "default": true,
+          "description": "Copy text selected with the mouse. Default: true.",
+          "type": "boolean"
+        },
+        "hide_tab_bar_when_single_tab": {
+          "default": false,
+          "description": "Hide the tab row when the workspace has one tab. Default: false.",
+          "type": "boolean"
+        },
+        "host_cursor": {
+          "$ref": "#/$defs/HostCursorModeConfig",
+          "default": "auto",
+          "description": "Host cursor policy. Default: auto."
+        },
+        "mobile_width_threshold": {
+          "default": 64,
+          "description": "Terminal width at or below which Herdr uses the mobile single-column layout. Default: 64.",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "mouse_capture": {
+          "default": true,
+          "description": "Capture mouse input for Herdr's mouse UI. Default: true.",
+          "type": "boolean"
+        },
+        "mouse_scroll_lines": {
+          "default": null,
+          "description": "Lines to scroll per mouse wheel notch. Default: 3.",
+          "format": "uint",
+          "minimum": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "pane_borders": {
+          "default": true,
+          "description": "Draw borders around split panes. Default: true.",
+          "type": "boolean"
+        },
+        "pane_gaps": {
+          "default": true,
+          "description": "Keep split panes visually separated instead of sharing divider borders. Default: true.",
+          "type": "boolean"
+        },
+        "prompt_new_tab_name": {
+          "default": true,
+          "description": "Ask for a tab name before creating a new tab. Default: true.",
+          "type": "boolean"
+        },
+        "redraw_on_focus_gained": {
+          "default": true,
+          "description": "Force a full host-terminal redraw when the outer terminal regains focus. Default: true.",
+          "type": "boolean"
+        },
+        "right_click_passthrough_modifier": {
+          "$ref": "#/$defs/RightClickPassthroughModifierConfig",
+          "description": "Modifier that lets right-click gestures pass through to pane apps. Empty disables it."
+        },
+        "show_agent_labels_on_pane_borders": {
+          "default": false,
+          "description": "Show agent labels in split pane borders when no manual pane label is set. Default: false.",
+          "type": "boolean"
+        },
+        "sidebar": {
+          "$ref": "#/$defs/SidebarConfig",
+          "default": {
+            "agents": {
+              "row_gap": 0,
+              "rows": [
+                [
+                  "state_icon",
+                  "workspace",
+                  "tab"
+                ],
+                [
+                  "agent"
+                ]
+              ],
+              "rows_by_agent": {}
+            },
+            "spaces": {
+              "row_gap": 0,
+              "rows": [
+                [
+                  "state_icon",
+                  "workspace"
+                ],
+                [
+                  "branch",
+                  "git_status"
+                ]
+              ]
+            }
+          },
+          "description": "Expanded sidebar row composition."
+        },
+        "sidebar_collapsed_mode": {
+          "$ref": "#/$defs/SidebarCollapsedModeConfig",
+          "default": "compact",
+          "description": "Collapsed sidebar presentation. Default: compact."
+        },
+        "sidebar_max_width": {
+          "default": 36,
+          "description": "Maximum sidebar width (columns) when expanded. Default: 36.",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sidebar_min_width": {
+          "default": 18,
+          "description": "Minimum sidebar width (columns) when expanded. Default: 18.",
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sidebar_width": {
+          "default": 26,
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sound": {
+          "$ref": "#/$defs/SoundConfig",
+          "description": "Play sounds when agents change state in background workspaces."
+        },
+        "toast": {
+          "$ref": "#/$defs/ToastConfig",
+          "description": "Optional visual toast notifications for background workspace events."
+        }
+      },
+      "type": "object"
+    },
+    "UpdateChannelConfig": {
+      "enum": [
+        "stable",
+        "preview"
+      ],
+      "type": "string"
+    },
+    "UpdateConfig": {
+      "properties": {
+        "channel": {
+          "$ref": "#/$defs/UpdateChannelConfig",
+          "default": "stable"
+        },
+        "manifest_check": {
+          "default": true,
+          "type": "boolean"
+        },
+        "version_check": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "WorktreesConfig": {
+      "properties": {
+        "directory": {
+          "default": "~/.herdr/worktrees",
+          "description": "Root directory under which Herdr creates <repo>/<branch-slug> checkouts.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$id": "https://herdr.dev/schemas/config.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Configuration for herdr's config.toml. All sections and fields are optional; herdr falls back to safe defaults when a value is missing or invalid.",
+  "properties": {
+    "advanced": {
+      "$ref": "#/$defs/AdvancedConfig"
+    },
+    "experimental": {
+      "$ref": "#/$defs/ExperimentalConfig"
+    },
+    "keys": {
+      "$ref": "#/$defs/KeysConfig",
+      "default": {
+        "close_pane": "prefix+x",
+        "close_tab": "prefix+shift+x",
+        "close_workspace": "prefix+shift+d",
+        "copy_mode": "prefix+[",
+        "cycle_pane_next": "prefix+tab",
+        "cycle_pane_previous": "prefix+shift+tab",
+        "detach": "prefix+q",
+        "edit_scrollback": "prefix+e",
+        "focus_agent": "",
+        "focus_pane_down": "prefix+j",
+        "focus_pane_left": "prefix+h",
+        "focus_pane_right": "prefix+l",
+        "focus_pane_up": "prefix+k",
+        "goto": "prefix+g",
+        "help": "prefix+?",
+        "indexed": {
+          "agents": "",
+          "tabs": "",
+          "workspaces": ""
+        },
+        "last_pane": "",
+        "navigate_pane_down": "j",
+        "navigate_pane_left": "h",
+        "navigate_pane_right": "l",
+        "navigate_pane_up": "k",
+        "navigate_workspace_down": "down",
+        "navigate_workspace_up": "up",
+        "new_tab": "prefix+c",
+        "new_workspace": "prefix+shift+n",
+        "new_worktree": "prefix+shift+g",
+        "next_agent": "",
+        "next_tab": "prefix+n",
+        "next_workspace": "",
+        "open_notification_target": "prefix+o",
+        "open_worktree": "",
+        "prefix": "ctrl+b",
+        "previous_agent": "",
+        "previous_tab": "prefix+p",
+        "previous_workspace": "",
+        "reload_config": "prefix+shift+r",
+        "remote_image_paste": "ctrl+v",
+        "remove_worktree": "",
+        "rename_pane": "prefix+shift+p",
+        "rename_tab": "prefix+shift+t",
+        "rename_workspace": "prefix+shift+w",
+        "resize_mode": "prefix+r",
+        "settings": "prefix+s",
+        "split_horizontal": "prefix+minus",
+        "split_vertical": "prefix+v",
+        "swap_pane_down": "prefix+shift+j",
+        "swap_pane_left": "prefix+shift+h",
+        "swap_pane_right": "prefix+shift+l",
+        "swap_pane_up": "prefix+shift+k",
+        "switch_tab": "prefix+1..9",
+        "switch_workspace": "",
+        "toggle_sidebar": "prefix+b",
+        "workspace_picker": "prefix+w",
+        "zoom": "prefix+z"
+      }
+    },
+    "onboarding": {
+      "default": null,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "remote": {
+      "$ref": "#/$defs/RemoteConfig"
+    },
+    "session": {
+      "$ref": "#/$defs/SessionConfig"
+    },
+    "terminal": {
+      "$ref": "#/$defs/TerminalConfig"
+    },
+    "theme": {
+      "$ref": "#/$defs/ThemeConfig"
+    },
+    "ui": {
+      "$ref": "#/$defs/UiConfig"
+    },
+    "update": {
+      "$ref": "#/$defs/UpdateConfig"
+    },
+    "worktrees": {
+      "$ref": "#/$defs/WorktreesConfig"
+    }
+  },
+  "title": "herdr configuration",
+  "type": "object"
+}

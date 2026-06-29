@@ -38,6 +38,36 @@ herdr --default-config > ~/.config/herdr/config.toml
 onboarding = false
 ```
 
+## JSON Schema
+
+Herdr は `config.toml` 用の JSON Schema（Draft 2020-12）をソースツリーの [`schemas/config.json`](https://github.com/ogulcancelik/herdr/blob/master/schemas/config.json) に同梱しています。設定を解析する Rust 型から生成されるため、すべてのトップレベルセクションを網羅し、パーサーと同期した状態に保たれます。
+
+現在のスキーマを標準出力に表示します（`schema` Cargo feature を有効にしたビルドが必要です）:
+
+```bash
+herdr config schema
+```
+
+補完と検証を有効にするには、エディターで `config.toml` に関連付けます。
+
+**Taplo / Even Better TOML（VS Code）:** `config.toml` の先頭行にスキーマディレクティブを追加します:
+
+```toml
+#:schema https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json
+```
+
+または Taplo のグローバル設定（`~/.taplo/taplo.toml`）に登録します:
+
+```toml
+[[schemas]]
+path = "**/herdr/config.toml"
+url = "https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json"
+```
+
+**Neovim:** `#:schema` ディレクティブを読み取る TOML LSP（例: `taplo`）では、上記のディレクティブだけで十分です。それ以外の場合は、スキーマプラグインで同じ URL を `~/.config/herdr/config.toml` に割り当ててください。
+
+スキーマには正規のフィールド名が記載されます。パーサーが引き続き受け付ける Serde の `alias`（例: `agent_panel_sort = "workspaces"`、`scrollback_lines`、`zoom` の別名 `fullscreen`）は記載されないため、Herdr が読み込める場合でもエディターが従来の表記を警告することがあります。
+
 ## 設定のリロード
 
 `config.toml` を編集した後、実行中のサーバーをリロードします:
