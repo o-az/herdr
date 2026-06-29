@@ -2,3 +2,4 @@
 /sitemap.xml /sitemap-index.xml 301
 /docs/skill/ /docs/agent-skill/ 301
 /docs/api/ /docs/socket-api/ 301
+/schema.json /schemas/config.json 301

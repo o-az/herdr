@@ -42,7 +42,7 @@ pub(crate) fn generate_schema() -> serde_json::Value {
     if let Some(map) = value.as_object_mut() {
         map.insert(
             "$id".into(),
-            serde_json::Value::String("https://herdr.dev/schemas/config.schema.json".into()),
+            serde_json::Value::String("https://herdr.dev/schemas/config.json".into()),
         );
     }
     value

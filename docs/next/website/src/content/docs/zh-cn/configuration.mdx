@@ -53,7 +53,7 @@ herdr config schema
 **Taplo / Even Better TOML（VS Code）：** 在 `config.toml` 第一行添加 schema 指令：
 
 ```toml
-#:schema https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json
+#:schema https://herdr.dev/schemas/config.json
 ```
 
 或者在全局 Taplo 配置（`~/.taplo/taplo.toml`）中注册：
@@ -61,7 +61,7 @@ herdr config schema
 ```toml
 [[schemas]]
 path = "**/herdr/config.toml"
-url = "https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json"
+url = "https://herdr.dev/schemas/config.json"
 ```
 
 **Neovim：** 如果 TOML LSP 支持读取 `#:schema` 指令（例如 `taplo`），上面的指令就足够了。否则，请在 schema 插件中将同一 URL 关联到 `~/.config/herdr/config.toml`。

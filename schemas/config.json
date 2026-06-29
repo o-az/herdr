@@ -1433,7 +1433,7 @@
       "type": "object"
     }
   },
-  "$id": "https://herdr.dev/schemas/config.schema.json",
+  "$id": "https://herdr.dev/schemas/config.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "description": "Configuration for herdr's config.toml. All sections and fields are optional; herdr falls back to safe defaults when a value is missing or invalid.",
   "properties": {

@@ -54,6 +54,13 @@ async function preparePublicAssets() {
       recursive: true,
     });
   }
+
+  // Serve the config.toml JSON Schema at https://herdr.dev/schemas/config.json
+  await mkdir(resolve(publicDir, 'schemas'), { recursive: true });
+  await cp(
+    resolve(repoRoot, 'schemas/config.json'),
+    resolve(publicDir, 'schemas/config.json'),
+  );
 }
 
 async function preparePreviewDocs() {

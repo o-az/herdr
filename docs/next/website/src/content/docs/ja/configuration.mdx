@@ -53,7 +53,7 @@ herdr config schema
 **Taplo / Even Better TOML（VS Code）:** `config.toml` の先頭行にスキーマディレクティブを追加します:
 
 ```toml
-#:schema https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json
+#:schema https://herdr.dev/schemas/config.json
 ```
 
 または Taplo のグローバル設定（`~/.taplo/taplo.toml`）に登録します:
@@ -61,7 +61,7 @@ herdr config schema
 ```toml
 [[schemas]]
 path = "**/herdr/config.toml"
-url = "https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json"
+url = "https://herdr.dev/schemas/config.json"
 ```
 
 **Neovim:** `#:schema` ディレクティブを読み取る TOML LSP（例: `taplo`）では、上記のディレクティブだけで十分です。それ以外の場合は、スキーマプラグインで同じ URL を `~/.config/herdr/config.toml` に割り当ててください。

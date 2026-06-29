@@ -53,7 +53,7 @@ Associate it with `config.toml` in your editor for autocompletion and validation
 **Taplo / Even Better TOML (VS Code):** add a schema directive as the first line of `config.toml`:
 
 ```toml
-#:schema https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json
+#:schema https://herdr.dev/schemas/config.json
 ```
 
 Or register it globally in your Taplo config (`~/.taplo/taplo.toml`):
@@ -61,7 +61,7 @@ Or register it globally in your Taplo config (`~/.taplo/taplo.toml`):
 ```toml
 [[schemas]]
 path = "**/herdr/config.toml"
-url = "https://raw.githubusercontent.com/ogulcancelik/herdr/master/schemas/config.json"
+url = "https://herdr.dev/schemas/config.json"
 ```
 
 **Neovim:** with a TOML LSP that reads `#:schema` directives (e.g. `taplo`), the directive above is enough. Otherwise point your schema plugin at the same URL for `~/.config/herdr/config.toml`.
